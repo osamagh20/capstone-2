@@ -3,9 +3,7 @@ package com.example.aseel.Model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-
 import java.util.Date;
-
 
 
 @Entity
@@ -13,15 +11,9 @@ public class InvestOpp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer oppId;
-    @NotEmpty(message = "Please enter type")
-    @Column(columnDefinition = "varchar(10) not null")
-    private String oppType;
     @NotNull(message = "Please enter the cover amount")
     @Column(columnDefinition = "double not null")
     private Double coverAmount;
-    @NotNull(message = "Please enter the limit of participants")
-    @Column(columnDefinition = "int not null")
-    private Integer limitPart;
     @NotNull(message = "Please enter the start date")
     @Column(columnDefinition = "date not null")
     private Date startDate;
@@ -42,13 +34,7 @@ public class InvestOpp {
         this.oppId = oppId;
     }
 
-    public String getOppType() {
-        return oppType;
-    }
 
-    public void setOppType(String oppType) {
-        this.oppType = oppType;
-    }
 
     public Double getCoverAmount() {
         return coverAmount;
@@ -59,14 +45,6 @@ public class InvestOpp {
     }
 
 
-
-    public Integer getLimitPart() {
-        return limitPart;
-    }
-
-    public void setLimitPart(Integer limitPart) {
-        this.limitPart = limitPart;
-    }
 
     public Date getStartDate() {
         return startDate;

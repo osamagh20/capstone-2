@@ -3,9 +3,6 @@ package com.example.aseel.Model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 
 @Entity
@@ -16,9 +13,12 @@ public class RequestOpp {
     private Integer id;
     @NotEmpty(message = "Please enter your description")
     @Column(columnDefinition = "varchar(200) not null")
-    private String des;
+    private String description;
     @Column(columnDefinition = "varchar(10) ")
     private String status;
+    @NotNull(message = "Enter your amount")
+    @Column(columnDefinition = "int not null")
+    private Integer investAmount;
     @NotNull(message = "Please enter investor id")
     @Column(columnDefinition = "int not null")
     private Integer investId;
@@ -34,12 +34,12 @@ public class RequestOpp {
         this.id = id;
     }
 
-    public String getDes() {
-        return des;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDes(String des) {
-        this.des = des;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getStatus() {
@@ -64,5 +64,13 @@ public class RequestOpp {
 
     public void setIdOpp(Integer idOpp) {
         this.idOpp = idOpp;
+    }
+
+    public Integer getInvestAmount() {
+        return investAmount;
+    }
+
+    public void setInvestAmount(Integer investAmount) {
+        this.investAmount = investAmount;
     }
 }

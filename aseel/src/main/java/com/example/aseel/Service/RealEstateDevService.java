@@ -13,12 +13,14 @@ public class RealEstateDevService {
     private final InvestOppRepository investOppRepository;
     private final RequestOppRepository requestOppRepository;
     private final ContractOppRepository contractOppRepository;
+    private final InvestorRepository investorRepository;
 
-    public RealEstateDevService(RealEstateDevRepository realEstateDevRepository,InvestOppRepository investOppRepository,RequestOppRepository requestOppRepository, ContractOppRepository contractOppRepository) {
+    public RealEstateDevService(RealEstateDevRepository realEstateDevRepository, InvestOppRepository investOppRepository, RequestOppRepository requestOppRepository, ContractOppRepository contractOppRepository, InvestorRepository investorRepository) {
         this.realEstateDevRepository = realEstateDevRepository;
         this.investOppRepository = investOppRepository;
         this.requestOppRepository = requestOppRepository;
         this.contractOppRepository = contractOppRepository;
+        this.investorRepository = investorRepository;
     }
 
     public List<RealEstateDev> getAllRealEstateDev() {
@@ -31,18 +33,20 @@ public class RealEstateDevService {
     }
 
     public void updateRealEstateDev(Integer id, RealEstateDev realEstateDev) {
-        RealEstateDev updateRealEstateDev = realEstateDevRepository.findRealEstateDevByCR(id);
+        RealEstateDev updateRealEstateDev = realEstateDevRepository.findRealEstateDevById(id);
         if (updateRealEstateDev == null) {
             throw new ApiException("id not found");
         }
         updateRealEstateDev.setCompanyName(realEstateDev.getCompanyName());
         updateRealEstateDev.setCompanyEmail(realEstateDev.getCompanyEmail());
-        updateRealEstateDev.setCompanyPhone(realEstateDev.getCompanyPhone());
+        updateRealEstateDev.setPhoneNumber(realEstateDev.getPhoneNumber());
+        updateRealEstateDev.setAssets(realEstateDev.getAssets());
+        updateRealEstateDev.setCommercialRecord(realEstateDev.getCommercialRecord());
         realEstateDevRepository.save(updateRealEstateDev);
     }
 
     public void deleteRealEstateDev(Integer id) {
-        RealEstateDev delRealEstateDev = realEstateDevRepository.findRealEstateDevByCR(id);
+        RealEstateDev delRealEstateDev = realEstateDevRepository.findRealEstateDevById(id);
         if (delRealEstateDev == null) {
             throw new ApiException("id not found");
         }
@@ -51,7 +55,7 @@ public class RealEstateDevService {
 
 
     public void addInvestOpp(InvestOpp investOpp) {
-        RealEstateDev find = realEstateDevRepository.findRealEstateDevByCR(investOpp.getCrCompany());
+        RealEstateDev find = realEstateDevRepository.findRealEstateDevById(investOpp.getCrCompany());
         System.out.println(find);
         if (find == null) {
             return;
@@ -76,8 +80,15 @@ public class RealEstateDevService {
 
     public void acceptRequest(Integer id) {
             RequestOpp requestOpp = requestOppRepository.findRequestOppById(id);
+            InvestOpp investOpp = investOppRepository.findInvestOppByOppId(id);
             if(requestOpp != null && requestOpp.getStatus().equals("pending")){
                 requestOpp.setStatus("accepted");
+                investOpp.setCoverAmount(investOpp.getCoverAmount() - requestOpp.getInvestAmount());
+                for (int i = 0; i < requestOppRepository.findAll().size(); i++) {
+                    if(requestOppRepository.findAll().get(i).getStatus().equals("pending")){
+                        requestOppRepository.delete(requestOppRepository.findAll().get(i));
+                    }
+                }
             }
 
             throw new ApiException("request not found");

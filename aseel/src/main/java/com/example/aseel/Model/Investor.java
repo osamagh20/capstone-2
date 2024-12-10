@@ -26,7 +26,7 @@ public class Investor {
     private String email;
     @NotEmpty(message = "Please enter the phone")
     @Column(columnDefinition = "varchar(10) not null unique")
-    private String phone;
+    private String phoneNumber;
 
 
     public Integer getId() {
@@ -61,12 +61,12 @@ public class Investor {
         this.email = email;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
 

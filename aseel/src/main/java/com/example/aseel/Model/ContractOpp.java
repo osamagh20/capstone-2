@@ -1,5 +1,4 @@
 package com.example.aseel.Model;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -7,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class ContractOpp {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer contractId;
@@ -51,5 +51,6 @@ public class ContractOpp {
     public void setCount_invest(Integer count_invest) {
         this.count_invest = count_invest;
     }
+
 
 }

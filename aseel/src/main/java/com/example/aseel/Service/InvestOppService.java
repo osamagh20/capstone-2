@@ -27,20 +27,6 @@ public class InvestOppService {
 
 
 
-//    public void updateInvestOpp(Integer id, InvestOpp investOpp){
-//        InvestOpp oldInvestOpp = investOppRepository.findInvestOppByOppId(id);
-//        if(oldInvestOpp == null){
-//            throw new ApiException("id not found");
-//        }
-//        oldInvestOpp.setOppType(investOpp.getOppType());
-//        oldInvestOpp.setCoverAmount(investOpp.getCoverAmount());
-//        oldInvestOpp.setLimitPart(investOpp.getLimitPart());
-//        oldInvestOpp.setStartDate(investOpp.getStartDate());
-//        oldInvestOpp.setEndDate(investOpp.getEndDate());
-//        oldInvestOpp.setLocation(investOpp.getLocation());
-//        oldInvestOpp.setCrCompany(investOpp.getCrCompany());
-//        investOppRepository.save(oldInvestOpp);
-//    }
 
 
 }

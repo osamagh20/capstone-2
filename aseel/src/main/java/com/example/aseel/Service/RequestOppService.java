@@ -16,4 +16,8 @@ public class RequestOppService {
     public List<RequestOpp> getAllRequestOpp() {
         return requestOppRepository.findAll();
     }
+
+    public RequestOpp getRequestOppById(Integer id) {
+        return requestOppRepository.findRequestOppById(id);
+    }
 }

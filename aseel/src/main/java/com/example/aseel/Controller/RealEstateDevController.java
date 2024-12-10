@@ -4,7 +4,6 @@ import com.example.aseel.ApiResponse.ApiResponse;
 import com.example.aseel.Model.ContractOpp;
 import com.example.aseel.Model.InvestOpp;
 import com.example.aseel.Model.RealEstateDev;
-import com.example.aseel.Repository.RealEstateDevRepository;
 import com.example.aseel.Service.RealEstateDevService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +17,9 @@ import java.util.List;
 public class RealEstateDevController {
 
     private final RealEstateDevService realEstateDevService;
-    private final RealEstateDevRepository realEstateDevRepository;
 
-    public RealEstateDevController(RealEstateDevService realEstateDevService, RealEstateDevRepository realEstateDevRepository) {
+    public RealEstateDevController(RealEstateDevService realEstateDevService) {
         this.realEstateDevService = realEstateDevService;
-        this.realEstateDevRepository = realEstateDevRepository;
     }
 
     @GetMapping("/get")
